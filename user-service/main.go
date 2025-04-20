@@ -1,0 +1,27 @@
+package main
+
+import (
+	"cap-club/user-service/config"
+	"cap-club/user-service/handlers"
+	"cap-club/user-service/logger"
+	"fmt"
+	"log/slog"
+
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
+	conf := config.MustLoad()
+	log := logger.LoggerInit(conf.Env)
+	log = log.With(slog.String("env", conf.Env))
+	if conf.StartUpStatus == 0 {
+		log.Info("+")
+	} else {
+		log.Info("Initializing service", slog.String("Address", fmt.Sprintf("%s:%d", conf.Address, conf.Port)))
+
+		router := gin.Default()
+		router.LoadHTMLGlob("user-service/ui/html/*")
+		router.GET("/main", handlers.MainPageHandler)
+		router.Run(fmt.Sprintf("%s:%d", conf.Address, conf.Port))
+	}
+}
