@@ -29,6 +29,8 @@
 
 Delivery service with microservice architecture
 
+[![Go](https://github.com/wnderbin/capybara-club/actions/workflows/go.yml/badge.svg?branch=main)](https://github.com/wnderbin/capybara-club/actions/workflows/go.yml)
+
 ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 
 ### Built with
