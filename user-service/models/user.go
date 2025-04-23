@@ -4,7 +4,6 @@ import "time"
 
 type User struct {
 	Id       string `gorm:"primary_key" json:"id"`
-	Jwt      string `json:"token"`
 	Name     string `json:"name"`
 	Username string `json:"username"`
 	Email    string `json:"email"`

@@ -44,12 +44,5 @@ func Login(c *gin.Context) {
 		MaxAge:   300,         // cookie lifetime, in seconds
 	})
 
-	user.Jwt = token
-	err = database.DB.Save(&user).Error
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "could not save token"}) // the token was saved in the database for comparison with the user's token and permission for further actions
-		return
-	}
-
 	c.JSON(http.StatusAccepted, gin.H{"message": "your token was saved in cookies and its lifetime is about 5 minutes, after this time you will need to log in to your account again."})
 }

@@ -1,6 +1,5 @@
 CREATE TABLE users (
     id TEXT PRIMARY KEY,
-    jwt TEXT NOT NULL UNIQUE,
     name TEXT NOT NULL,
     username TEXT NOT NULL UNIQUE,
     email TEXT NOT NULL,

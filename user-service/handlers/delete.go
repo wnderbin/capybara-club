@@ -24,7 +24,6 @@ func DeleteUser(c *gin.Context) {
 	_, err = jwt.ParseWithClaims(cookie, claims, func(token *jwt.Token) (interface{}, error) {
 		return []byte(conf.JWTKey), nil
 	})
-
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "invalid token"})
 		return

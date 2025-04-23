@@ -24,7 +24,6 @@ func Register(c *gin.Context) {
 	}
 	database.DB.Create(&models.User{
 		Id:       uuid.NewString(),
-		Jwt:      "-",
 		Name:     name,
 		Username: username,
 

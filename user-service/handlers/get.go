@@ -5,20 +5,13 @@ import (
 	"cap-club/user-service/database"
 	"cap-club/user-service/models"
 	"net/http"
-	"time"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 )
 
-func UpdateUser(c *gin.Context) {
+func GetUser(c *gin.Context) {
 	var user models.User
-
-	name := c.Query("name")
-	username := c.Query("username")
-	email := c.Query("email")
-	password := c.Query("password")
-
 	cookie, err := c.Cookie("jwt-token")
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "no token found"})
@@ -40,21 +33,9 @@ func UpdateUser(c *gin.Context) {
 
 	err = database.DB.Where("username = ?", userUsername).First(&user).Error
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to find user"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to delete user"})
 		return
 	}
 
-	user.Name = name
-	user.Username = username
-	user.Email = email
-	user.Password = password
-	user.Updated_at = time.Now()
-
-	err = database.DB.Save(&user).Error
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to update user"})
-		return
-	}
-
-	c.JSON(http.StatusAccepted, gin.H{"message": "updated successfully"})
+	c.JSON(http.StatusAccepted, user)
 }
