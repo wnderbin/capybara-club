@@ -28,6 +28,7 @@ type ServiceConfig struct {
 	StartUpStatus int            `yaml:"startup-status"`
 	Address       string         `yaml:"address"`
 	Port          int            `yaml:"service-port"`
+	JWTKey        string         `yaml:"jwt_key"`
 	Postgres      PostgresConfig `yaml:"postgres"`
 	Redis         RedisConfig    `yaml:"redis"`
 }

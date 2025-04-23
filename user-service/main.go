@@ -22,6 +22,11 @@ func main() {
 		router := gin.Default()
 		router.LoadHTMLGlob("user-service/ui/html/*")
 		router.GET("/main", handlers.MainPageHandler)
+		router.GET("/register/", handlers.RegisterUserForm)
+		router.GET("/login/", handlers.LoginUserForm)
+
+		router.POST("/register/postform", handlers.Register)
+		router.POST("/login/postform", handlers.Login)
 		router.Run(fmt.Sprintf("%s:%d", conf.Address, conf.Port))
 	}
 }
