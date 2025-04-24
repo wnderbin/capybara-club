@@ -44,12 +44,17 @@ Delivery service with microservice architecture
 
 ## Project status
 
-Here is information about how the project will work on its different versions. \
-Current version of the project: (+/-)
-* Launch in a containers: -
-* Launch workflows: -
-* Run locally via makefile: +
-* Dependencies (What you should have pre-installed before starting a project): Postgres & Redis
+Here is information about how the project will work on its different versions.
+
+
+- [ ] `Launch in containers`
+- [X] `Launch workflows`
+- [X] `Run locally via makefile`
+- [X] `Dependencies`: Postgres & Redis
+- [ ] `Microservices Status`: status of tests and health of microservices
+  - [X] `User-Service`
+  - [ ] `Reustaurant-Service`
+  - [ ] `Order-Service`
 
 ## Getting started
 
@@ -57,11 +62,11 @@ Instructions on how to run a project locally
 
 ### API documentation
 
-...
+You can find the documentation in the *docs/doc.md*
 
 ### Dependencies
 
-* **GORM** - gorm.io/gorm
+#### Installing dependencies
 
 ```
 go mod download
@@ -70,12 +75,18 @@ go mod download
 
 ### Installation and Launch
 
-...
+```
+git clone https://github.com/wnderbin/capybara-club
+cd capybara-club
+---
+make go-run-service-user 
+# launching a microservice that works with users
+```
 
 ## Project structure
 
 **.github** - CI/CD \
-**docs** - documentation about ToDoFlow project \
+**docs** - documentation about CapybaraClub \
 **user-service** - user microservice
 
 ## License

@@ -8,6 +8,7 @@ import (
 
 func Router(r *gin.Engine) {
 	// --- GET ---
+
 	r.GET("/main", handlers.MainPageHandler)
 	r.GET("/register/", handlers.RegisterUserForm)
 	r.GET("/login/", handlers.LoginUserForm)
