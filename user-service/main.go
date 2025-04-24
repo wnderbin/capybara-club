@@ -2,7 +2,9 @@ package main
 
 import (
 	"cap-club/user-service/config"
+	"cap-club/user-service/database"
 	"cap-club/user-service/logger"
+	"cap-club/user-service/migrator"
 	"cap-club/user-service/routes"
 	"fmt"
 	"log/slog"
@@ -17,6 +19,11 @@ func main() {
 	if conf.StartUpStatus == 0 {
 		log.Info("+")
 	} else {
+		sqldb, err := database.DB.DB()
+		if err != nil {
+			log.Error("[database] failed get sqldb")
+		}
+		migrator.ApplyMigrations(sqldb)
 		log.Info("Initializing service", slog.String("Address", fmt.Sprintf("%s:%d", conf.Address, conf.Port)))
 
 		router := gin.Default()

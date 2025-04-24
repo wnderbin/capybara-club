@@ -17,6 +17,10 @@ func Register(c *gin.Context) {
 	email := c.Request.FormValue("email")
 	password := c.Request.FormValue("password")
 
+	if name == "" || username == "" || email == "" || password == "" {
+		c.JSON(http.StatusNotAcceptable, gin.H{"error": "you cannot register because you have specified empty fields."})
+	}
+
 	hashed_password, err := utils.HashPassword(password)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "could not hash password..."})

@@ -10,11 +10,14 @@ import (
 
 func HashPassword(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return "", err
+	}
 	return string(bytes), err
 }
 
 func CheckHashedPassword(password, hash string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(password), []byte(hash))
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
 }
 
@@ -36,5 +39,5 @@ func GenerateJWT(username string, conf *config.ServiceConfig) (string, error) {
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return token.SignedString(conf.JWTKey)
+	return token.SignedString([]byte(conf.JWTKey)) //
 }

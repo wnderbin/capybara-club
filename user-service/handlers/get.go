@@ -33,7 +33,7 @@ func GetUser(c *gin.Context) {
 
 	err = database.DB.Where("username = ?", userUsername).First(&user).Error
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to delete user"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to find user"})
 		return
 	}
 

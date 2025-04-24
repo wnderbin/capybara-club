@@ -4,6 +4,7 @@ import (
 	"cap-club/user-service/config"
 	"cap-club/user-service/database"
 	"cap-club/user-service/models"
+	"cap-club/user-service/utils"
 	"net/http"
 	"time"
 
@@ -44,11 +45,21 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 
-	user.Name = name
-	user.Username = username
-	user.Email = email
-	user.Password = password
-	user.Updated_at = time.Now()
+	if name != "" || username != "" || email != "" || password != "" {
+		user.Name = name
+		user.Username = username
+		user.Email = email
+		hashed_password, err := utils.HashPassword(password)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "could not hash password..."})
+			return
+		}
+		user.Password = hashed_password
+		user.Updated_at = time.Now()
+	} else {
+		c.JSON(http.StatusNotAcceptable, gin.H{"error": "the changes cannot be applied because you have specified empty fields"})
+		return
+	}
 
 	err = database.DB.Save(&user).Error
 	if err != nil {
@@ -56,5 +67,5 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusAccepted, gin.H{"message": "updated successfully"})
+	c.JSON(http.StatusAccepted, gin.H{"message": "updated successfully, since you have changed your details, you need to register again"})
 }
