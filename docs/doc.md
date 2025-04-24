@@ -63,7 +63,7 @@ redis:
 * **debug** - JSON/LevelDebug
 * **prod** - JSON/LevelInfo
 
-**[JWT-KEY]** - Required for user authorization. When registering, a user is created, and when logging into an account, this key is assigned to him for 5 minutes, after which time the key is no longer relevant. The key itself is stored in cookies.
+**[JWT-KEY]** - Required for user authentication. When registering, a user is created, and when logging into an account, this key is assigned to him for 5 minutes, after which time the key is no longer relevant. The key itself is stored in cookies.
 
 **If you want to change the key for security purposes, you can generate it and assign it to the jwt_key variable in the configuration file.**
 ```
