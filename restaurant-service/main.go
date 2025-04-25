@@ -1,11 +1,10 @@
 package main
 
 import (
-	"cap-club/user-service/config"
-	"cap-club/user-service/database"
-	"cap-club/user-service/logger"
-	"cap-club/user-service/migrator"
-	"cap-club/user-service/routes"
+	"cap-club/restaurant-service/config"
+	"cap-club/restaurant-service/database"
+	"cap-club/restaurant-service/logger"
+	"cap-club/restaurant-service/migrator"
 	"fmt"
 	"log/slog"
 
@@ -25,10 +24,7 @@ func main() {
 		}
 		migrator.ApplyMigrations(sqldb)
 		log.Info("Initializing service", slog.String("Address", fmt.Sprintf("%s:%d", conf.Address, conf.Port)))
-
 		router := gin.Default()
-		router.LoadHTMLGlob("user-service/ui/html/*")
-		routes.Router(router)
 		router.Run(fmt.Sprintf("%s:%d", conf.Address, conf.Port))
 	}
 }
