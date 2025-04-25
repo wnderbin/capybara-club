@@ -28,3 +28,5 @@ jobs:
       run: make go-run-service-user
     - name: Restaurant-service checks
       run: make go-run-service-restaurant
+    - name: Admin-service checks
+      run: make go-run-service-admin
