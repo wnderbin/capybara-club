@@ -26,3 +26,5 @@ jobs:
 
     - name: User-service checks
       run: make go-run-service-user
+    - name: Restaurant-service checks
+      run: make go-run-service-restaurant
