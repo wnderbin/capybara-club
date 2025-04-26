@@ -51,10 +51,10 @@ func main() {
 	conf := config.MustLoad()
 	log := logger.LoggerInit(conf.Env)
 	log = log.With(slog.String("env", conf.Env))
-	DbInit(conf, log)
 	if conf.StartUpStatus == 0 {
 		log.Info("+")
 	} else {
+		DbInit(conf, log)
 		log.Info("Initializing service", slog.String("Address", fmt.Sprintf("%s:%d", conf.Address, conf.Port)))
 		router := gin.Default()
 		router.LoadHTMLGlob("admin-service/ui/html/*")
