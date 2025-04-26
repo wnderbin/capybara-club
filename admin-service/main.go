@@ -5,6 +5,7 @@ import (
 	"cap-club/admin-service/database"
 	"cap-club/admin-service/logger"
 	"cap-club/admin-service/migrator"
+	"cap-club/admin-service/routes"
 	"fmt"
 	"log/slog"
 
@@ -25,6 +26,8 @@ func main() {
 		migrator.ApplyMigrations(sqldb)
 		log.Info("Initializing service", slog.String("Address", fmt.Sprintf("%s:%d", conf.Address, conf.Port)))
 		router := gin.Default()
+		router.LoadHTMLGlob("admin-service/ui/html/*")
+		routes.Router(router)
 		router.Run(fmt.Sprintf("%s:%d", conf.Address, conf.Port))
 	}
 }

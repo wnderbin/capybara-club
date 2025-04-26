@@ -3,10 +3,13 @@ package database
 import (
 	"cap-club/admin-service/config"
 	"cap-club/admin-service/logger"
+	"cap-club/admin-service/models"
+	"cap-club/admin-service/utils"
 	"fmt"
 	"log/slog"
 	"time"
 
+	"github.com/google/uuid"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -22,6 +25,29 @@ func openPostgres() *gorm.DB {
 	if err != nil {
 		Log.Error(err.Error())
 		return nil
+	}
+	var adminFromConfig models.Admin
+	adm_name := conf.AdminUsername
+	adm_email := conf.AdminEmail
+	adm_password := conf.AdminPassword
+	hashed_password, err := utils.HashPassword(adm_password)
+	if err != nil {
+		Log.Error(err.Error())
+		return nil
+	}
+	err = db.Where("name = ?", adm_name).First(&adminFromConfig).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		Log.Error(err.Error())
+		return nil
+	} else if err == gorm.ErrRecordNotFound {
+		db.Create(&models.Admin{
+			Id:       uuid.NewString(),
+			Name:     adm_name,
+			Email:    adm_email,
+			Password: hashed_password,
+		})
+	} else {
+		Log.Info("Admin already exists")
 	}
 	return db
 }

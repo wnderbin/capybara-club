@@ -23,7 +23,7 @@ func Login(c *gin.Context) {
 	}
 
 	if passwordStatus := utils.CheckHashedPassword(user_password, user.Password); !passwordStatus {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Incorrect password specified"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "incorrect password specified"})
 		return
 	}
 

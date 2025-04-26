@@ -30,6 +30,8 @@ type ServiceConfig struct {
 	Port          int            `yaml:"service-port"`
 	AdminUsername string         `yaml:"admin_name"`
 	AdminPassword string         `yaml:"admin_password"`
+	AdminEmail    string         `yaml:"admin_email"`
+	JWTKey        string         `yaml:"jwt_key"`
 	Postgres      PostgresConfig `yaml:"postgres"`
 	Redis         RedisConfig    `yaml:"redis"`
 }

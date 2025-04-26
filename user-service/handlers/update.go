@@ -67,5 +67,5 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusAccepted, gin.H{"message": "updated successfully, since you have changed your details, you need to register again"})
+	c.JSON(http.StatusAccepted, gin.H{"message": "updated successfully, since you have changed your details, you need to login again"})
 }
