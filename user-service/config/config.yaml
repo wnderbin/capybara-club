@@ -1,5 +1,5 @@
 env: "local" # "local"/"dev"/"prod"
-startup-status: 0 # 1/0. 1 - run. 0 - tests
+startup-status: 1 # 1/0. 1 - run. 0 - tests
 address: 0.0.0.0 # the address where the microservice will be launched
 service-port: 8081 # the port on which the microservice will be launched
 jwt_key: 9BP4natUsI2miUcYVt2go9VFMM3Ayca0K8YN1F5tI0A= # The JWT key is best stored in a location that is not accessible to third-party users, such as a config file that won't be included in the repository via .gitignore, but since this project is a simple microservices + practices prototype, I don't think it will make any difference if I put it here.

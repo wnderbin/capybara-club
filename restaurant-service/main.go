@@ -1,10 +1,10 @@
 package main
 
 import (
+	"cap-club/migrator"
 	"cap-club/restaurant-service/config"
 	"cap-club/restaurant-service/database"
 	"cap-club/restaurant-service/logger"
-	"cap-club/restaurant-service/migrator"
 	"fmt"
 	"log/slog"
 

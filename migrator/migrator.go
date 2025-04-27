@@ -15,7 +15,7 @@ func ApplyMigrations(db *sql.DB) error {
 		return fmt.Errorf("[migrator] init postgres migrations: %w", err)
 	}
 	m, err := migrate.NewWithDatabaseInstance(
-		"file://admin-service/migrations",
+		"file://migrations",
 		"postgres",
 		driver,
 	)

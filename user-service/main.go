@@ -1,10 +1,10 @@
 package main
 
 import (
+	"cap-club/migrator"
 	"cap-club/user-service/config"
 	"cap-club/user-service/database"
 	"cap-club/user-service/logger"
-	"cap-club/user-service/migrator"
 	"cap-club/user-service/routes"
 	"fmt"
 	"log/slog"
