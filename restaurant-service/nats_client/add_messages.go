@@ -1,16 +1,15 @@
-package handlers
+package nats_client
 
 import (
 	"cap-club/restaurant-service/database"
 	"cap-club/restaurant-service/models"
-	"cap-club/restaurant-service/nats_client"
 	"encoding/json"
 
 	"github.com/nats-io/nats.go"
 )
 
 func UpdateRestaurants() {
-	nc, err := nats_client.New(nats.DefaultURL)
+	nc, err := New(nats.DefaultURL)
 	if err != nil {
 		database.Log.Error("[nuts] nuts error")
 		return

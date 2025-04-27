@@ -16,6 +16,8 @@ func Router(r *gin.Engine) {
 	r.POST("/add_restaurant/postform", handlers.AddRestaurant)
 	// --- PUT ---
 	r.PUT("/admin", handlers.UpdateAdmin)
+	r.PUT("/restaurant", handlers.UpdateRestaurant)
 	// --- DELETE ---
 	r.DELETE("/admin", handlers.DeleteAdmin)
+	r.DELETE("/restaurant", handlers.DeleteRestaurant)
 }

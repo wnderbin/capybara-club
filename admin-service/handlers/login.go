@@ -5,7 +5,6 @@ import (
 	"cap-club/admin-service/database"
 	"cap-club/admin-service/models"
 	"cap-club/admin-service/utils"
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -16,10 +15,8 @@ func Login(c *gin.Context) {
 
 	admin_name := c.Request.FormValue("name")
 	admin_password := c.Request.FormValue("password")
-	fmt.Println(admin_name, admin_password)
 
 	err := database.DB.Where("name = ?", admin_name).Take(&admin).Error
-	fmt.Println(admin)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "admin with this name does not exist"})
 		return
