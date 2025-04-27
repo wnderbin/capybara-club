@@ -12,6 +12,12 @@
             <li> <a href="#routes-for-user-microservice"> About routes for user-microservice</a> </li>
         </ul>
     </li>
+    <li><a href="#admin-service"> About admin-microservice </a>
+      <ul> 
+            <li> <a href="#admin-service-configyaml"> About configuration file in admin-service </a> </li>
+            <li> <a href="#routes-for-admin-microservice"> About routes for admin-microservice</a> </li>
+        </ul>
+    </li>
     
 </details>
 
@@ -28,8 +34,6 @@ The task of this microservice is to work with the user.
 * **database** - Initialization of microservice operation with redis & postgres databases
 * **handlers** - Handlers for urls
 * **logger** - Logging tool
-* **migrations** - Database migrations
-* **migrator** - Performs database migrations
 * **models** - Defining a user and their fields as an object
 * **routes** - URL's
 * **ui** - User interface
@@ -85,3 +89,83 @@ openssl rand -base64 32
 #### DELETE
 * **/user** - Deletes the current user
 
+## Admin-service
+
+The task of this microservice is to work with administrators
+
+**Administrators** - users with advanced parameters. At the same time, the user cannot be given administrator rights, you can only give him an administrator account. Login to all administrator privileges is carried out using the login. Otherwise, the use of the administrator account will be prohibited. Login lasts the same time as the user - 5 minutes.
+
+### Admin-microservice structure:
+
+* **config** -  Working with and storing the configuration. Here you can change the microservice settings in the configuration file *config.yaml*
+* **database** -  Initialization of microservice operation with redis & postgres databases
+* **handlers** - Handlers for urls
+* **logger** - Logging tool
+* **models** - Defining a admin and their fields as an object
+* **routes** - URL's
+* **ui** -  User interface
+* **utils** - Utilities required for user security and authorization
+
+#### The user microservice can only be launched if the startup-status status is changed to 1 in the configuration file. 
+#### If 0 is specified, only the logger will be initialized, this status is necessary to run tests for the microservice.
+
+
+### Admin-service config.yaml
+
+```
+env: "local" # "local"/"dev"/"prod"
+startup-status: 1 # 1/0. 1 - run. 0 - tests
+address: 0.0.0.0 # the address where the microservice will be launched
+service-port: 8083 # the port on which the microservice will be launched
+admin_name: admin
+admin_password: pass123
+admin_email: admin@mail
+jwt_key: XU5AusKEA2MCVt5khTUsVvwHj90kBkLNyqqUCAZRixU= 
+
+postgres:
+  host: "localhost"
+  port: 5432
+  user: "wnd"
+  password: "123"
+  dbname: "wnd"
+  sslmode: "disable"
+
+redis:
+  address: "localhost:6379"
+  password: ""
+  db: 0
+
+```
+
+**The administrator specified in this configuration file is the root and cannot be deleted or changed. It is initialized together with the database.** 
+
+**Administrator:**
+* **admin_name:** admin
+* **admin_password:** pass123
+* **admin_email:** admin@mail
+
+**[ENV]** - Affects the format and information in messages that will be sent by the logger.
+
+* local - Text/LevelDebug
+* debug - JSON/LevelDebug
+* prod - JSON/LevelInfo
+
+**[JWT-KEY]** - Required for admin authentication.
+
+**If you want to change the key for security purposes, you can generate it and assign it to the jwt_key variable in the configuration file.**
+
+```
+openssl rand -base64 32
+```
+
+### Routes for admin-microservice
+
+#### GET
+* **/login/** - Account login form
+#### POST
+* **/login/postform** - Sends data from the login form
+* **/admin** - Creates an administrator account. Path: /admin?name=X&email=X&password=X
+#### PUT
+* **/admin** - Changes admin data. Path: /admin?name=X&email=X&password=X
+#### DELETE
+* **/admin** - Deletes the current admin

@@ -55,6 +55,7 @@ Here is information about how the project will work on its different versions.
   - [X] `User-Service`
   - [ ] `Reustaurant-Service`
   - [ ] `Order-Service`
+  - [ ] `Refactoring microservices structure`
 
 ## Getting started
 
