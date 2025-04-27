@@ -82,13 +82,22 @@ cd capybara-club
 ---
 make go-run-service-user 
 # launching a microservice that works with users
+---
+make go-run-service-restaurant
+# launching a microservice that works with restaurants
+---
+make go-run-service-admin
+# launching a microservice that works with admins & restaurants
+---
 ```
 
 ## Project structure
 
 **.github** - CI/CD \
 **docs** - documentation about CapybaraClub \
-**user-service** - user microservice
+**user-service** - user microservice \
+**admin-service** - admin microservice \
+**restaurant-service** - restaurant microservice
 
 ## License
 Before using the project, it is recommended to read the license

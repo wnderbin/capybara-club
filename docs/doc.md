@@ -25,7 +25,7 @@
 * **Current version:** 0.1 (BETA)
 * **Tested on:** ubuntu-latest 
 * **Author:** wnderbin
-* **Go version:** 1.22.2
+* **Go version:** 1.24.2
 
 ## User-service
 The task of this microservice is to work with the user.
@@ -88,6 +88,8 @@ openssl rand -base64 32
 **X** - your new data 
 #### DELETE
 * **/user** - Deletes the current user
+
+-----
 
 ## Admin-service
 
@@ -169,3 +171,14 @@ openssl rand -base64 32
 * **/admin** - Changes admin data. Path: /admin?name=X&email=X&password=X
 #### DELETE
 * **/admin** - Deletes the current admin
+
+#### --- NATS (Message Broker) Routes ---
+
+#### GET
+* **/add_restaurant/** - Add restaurant form
+#### POST
+* **/add_restaurant/postform** - Sends data from the add_restaurants form
+#### PUT
+* **/restaurant** - Changes restaurant data. Path: /restaurant?id=X&name=X&address=X&email=X&phone=X&description=X. You must provide a current restaurant ID to update your data.
+#### DELETE 
+* **/restaurant** - Deletes the restaurant with the specified name. Path: /restaurant?name=X
