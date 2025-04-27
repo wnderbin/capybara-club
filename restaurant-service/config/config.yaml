@@ -1,5 +1,5 @@
 env: "local" # "local"/"dev"/"prod"
-startup-status: 0 # 1/0. 1 - run. 0 - tests
+startup-status: 1 # 1/0. 1 - run. 0 - tests
 address: 0.0.0.0 # the address where the microservice will be launched
 service-port: 8082 # the port on which the microservice will be launched
 

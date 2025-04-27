@@ -4,6 +4,7 @@ import (
 	"cap-club/migrator"
 	"cap-club/restaurant-service/config"
 	"cap-club/restaurant-service/database"
+	"cap-club/restaurant-service/handlers"
 	"cap-club/restaurant-service/logger"
 	"fmt"
 	"log/slog"
@@ -24,6 +25,7 @@ func main() {
 		}
 		migrator.ApplyMigrations(sqldb)
 		log.Info("Initializing service", slog.String("Address", fmt.Sprintf("%s:%d", conf.Address, conf.Port)))
+		go handlers.UpdateRestaurants()
 		router := gin.Default()
 		router.Run(fmt.Sprintf("%s:%d", conf.Address, conf.Port))
 	}

@@ -1,8 +1,9 @@
 package handlers
 
 import (
+	"cap-club/admin-service/config"
+	"cap-club/admin-service/nats_client"
 	"cap-club/restaurant-service/models"
-	"cap-club/user-service/config"
 	"encoding/json"
 	"net/http"
 	"time"
@@ -37,7 +38,7 @@ func AddRestaurant(c *gin.Context) {
 	phone := c.Request.FormValue("phone")
 	description := c.Request.FormValue("description")
 
-	nc, err := nats.Connect(nats.DefaultURL)
+	nc, err := nats_client.New(nats.DefaultURL)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "nuts error"})
 		return
@@ -57,7 +58,7 @@ func AddRestaurant(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "json marshaling failed"})
 		return
 	}
-	err = nc.Publish("add-restaurant", jsonMsg)
+	err = nc.Conn.Publish("add.restaurant", jsonMsg)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "error publishing"})
 		return
