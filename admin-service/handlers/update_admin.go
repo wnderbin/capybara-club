@@ -38,7 +38,7 @@ func UpdateAdmin(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "could not hash password..."})
 		return
 	}
-	admName := claims["adminname"].(string)
+	admName := claims["admin"].(string)
 	if admName == conf.AdminUsername {
 		c.JSON(http.StatusNotAcceptable, gin.H{"error": "root administrator cannot be changed"})
 		return

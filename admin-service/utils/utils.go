@@ -38,6 +38,6 @@ func GenerateJWT(adminName string, conf *config.ServiceConfig) (string, error) {
 			ExpiresAt: expirationTime.Unix(),
 		},
 	}
-	token := jwt.NewWithClaims(jwt.SigningMethodPS256, claims)
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString([]byte(conf.JWTKey))
 }

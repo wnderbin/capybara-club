@@ -29,7 +29,7 @@ func DeleteAdmin(c *gin.Context) {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "invalid token"})
 	}
 
-	admName := claims["adminname"].(string)
+	admName := claims["admin"].(string)
 	if admName == conf.AdminUsername {
 		c.JSON(http.StatusNotAcceptable, gin.H{"error": "can't delete root administrator"})
 		return
