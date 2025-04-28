@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	Conf *config.DBConfig = config.MustLoad()
+	Conf *config.DBConfig = config.DatabaseLoad()
 	Log  slog.Logger      = *logger.LoggerInit(Conf.Env)
 	DB   *gorm.DB         = openPostgres()
 )

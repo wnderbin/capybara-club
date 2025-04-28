@@ -48,6 +48,24 @@ func MustLoad() *DBConfig {
 	return &config
 }
 
+func DatabaseLoad() *DBConfig {
+	config_path := "./config/config.yaml"
+
+	if config_path == "" {
+		log.Fatal("[ config.go ] Config_path is not set")
+	}
+	if _, err := os.Stat(config_path); os.IsExist(err) {
+		log.Fatalf("[ config.go ] Config is not exist: %s\n", config_path)
+	}
+
+	var config DBConfig
+
+	if err := cleanenv.ReadConfig(config_path, &config); err != nil {
+		log.Fatalf("[ config.go ] Cannot read config: %s\n", config_path)
+	}
+	return &config
+}
+
 func (p PostgresConfig) GetDSN() string {
 	return fmt.Sprintf(
 		"host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",

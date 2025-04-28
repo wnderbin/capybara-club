@@ -13,4 +13,4 @@ redis:
   password: ""
   db: 0
 
-startup-status: 0 # 1/0. 1 - run. 0 - tests
+startup-status: 1 # 1/0. 1 - run. 0 - tests
