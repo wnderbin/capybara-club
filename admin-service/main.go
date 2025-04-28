@@ -2,11 +2,10 @@ package main
 
 import (
 	"cap-club/admin-service/config"
-	"cap-club/admin-service/database"
-	"cap-club/admin-service/logger"
 	"cap-club/admin-service/models"
 	"cap-club/admin-service/routes"
 	"cap-club/admin-service/utils"
+	"cap-club/database"
 	"cap-club/migrator"
 	"fmt"
 	"log/slog"
@@ -17,20 +16,18 @@ import (
 
 func main() {
 	conf := config.MustLoad()
-	log := logger.LoggerInit(conf.Env)
-	log = log.With(slog.String("env", conf.Env))
-	if conf.StartUpStatus == 0 {
-		log.Info("+")
+	if database.Conf.StartUpStatus == 0 {
+		database.Log.Info("+")
 	} else {
 		sqldb, err := database.DB.DB()
 		if err != nil {
-			log.Error("[database] failed to get sqldb")
+			database.Log.Error("[database] failed to get sqldb")
 		}
 		migrator.ApplyMigrations(sqldb)
-		log.Info("Initializing service", slog.String("Address", fmt.Sprintf("%s:%d", conf.Address, conf.Port)))
+		database.Log.Info("Initializing service", slog.String("Address", fmt.Sprintf("%s:%d", conf.Address, conf.Port)))
 		hashed_password, err := utils.HashPassword(conf.AdminPassword)
 		if err != nil {
-			log.Error("[utils] cannot hash password")
+			database.Log.Error("[utils] cannot hash password")
 		}
 		database.DB.Create(&models.Admin{
 			Id:       uuid.NewString(),

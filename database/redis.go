@@ -19,13 +19,13 @@ func CloseRedis() error {
 }
 
 func initRedis() *redis.Client {
-	if conf.StartUpStatus == 0 {
+	if Conf.StartUpStatus == 0 {
 		return rdb
 	}
 	rdb = redis.NewClient(&redis.Options{
-		Addr:     conf.Redis.Address,
-		Password: conf.Redis.Password,
-		DB:       conf.Redis.DB,
+		Addr:     Conf.Redis.Address,
+		Password: Conf.Redis.Password,
+		DB:       Conf.Redis.DB,
 	})
 
 	if _, err := rdb.Ping(Ctx).Result(); err != nil {

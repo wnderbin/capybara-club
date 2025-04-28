@@ -1,0 +1,16 @@
+env: "local"
+
+postgres:
+  host: "localhost"
+  port: 5432
+  user: "wnd"
+  password: "123"
+  dbname: "wnd"
+  sslmode: "disable"
+
+redis:
+  address: "localhost:6379"
+  password: ""
+  db: 0
+
+startup-status: 0 # 1/0. 1 - run. 0 - tests

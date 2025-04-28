@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"cap-club/restaurant-service/database"
+	"cap-club/database"
 	"cap-club/restaurant-service/models"
 	"net/http"
 

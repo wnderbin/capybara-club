@@ -1,8 +1,8 @@
 package database
 
 import (
-	"cap-club/restaurant-service/config"
-	"cap-club/restaurant-service/logger"
+	"cap-club/config"
+	"cap-club/logger"
 	"fmt"
 	"log/slog"
 	"time"
@@ -12,9 +12,9 @@ import (
 )
 
 var (
-	conf *config.ServiceConfig = config.MustLoad()
-	Log  slog.Logger           = *logger.LoggerInit(conf.Env)
-	DB   *gorm.DB              = openPostgres()
+	Conf *config.DBConfig = config.MustLoad()
+	Log  slog.Logger      = *logger.LoggerInit(Conf.Env)
+	DB   *gorm.DB         = openPostgres()
 )
 
 func openPostgres() *gorm.DB {
@@ -36,10 +36,10 @@ func ClosePostgres() error {
 }
 
 func initPostgres() (*gorm.DB, error) {
-	if conf.StartUpStatus == 0 {
+	if Conf.StartUpStatus == 0 {
 		return nil, nil
 	}
-	dsn := conf.Postgres.GetDSN()
+	dsn := Conf.Postgres.GetDSN()
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return nil, fmt.Errorf("[postgres] failed to connect to postgres: %w", err)

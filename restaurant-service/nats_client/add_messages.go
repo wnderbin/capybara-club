@@ -1,7 +1,7 @@
 package nats_client
 
 import (
-	"cap-club/restaurant-service/database"
+	"cap-club/database"
 	"cap-club/restaurant-service/models"
 	"encoding/json"
 

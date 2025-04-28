@@ -2,9 +2,9 @@ package handlers
 
 import (
 	"cap-club/admin-service/config"
-	"cap-club/admin-service/database"
 	"cap-club/admin-service/models"
 	"cap-club/admin-service/utils"
+	"cap-club/database"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
