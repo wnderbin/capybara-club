@@ -22,7 +22,7 @@ func SendId() {
 		database.Log.Info("Received name")
 		err = database.DB.Where("name = ?", recievedName).Find(&restaurant).Error
 		if err != nil {
-			database.Log.Error("Error deleting from database")
+			database.Log.Error("Error search in database")
 			return
 		}
 		restaurantID = restaurant.Id

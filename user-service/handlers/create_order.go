@@ -44,8 +44,8 @@ func CreateOrder(c *gin.Context) {
 		return
 	}
 	defer nc.Close()
-	msg := restaurantName
-	err = nc.Conn.Publish("get.restaurant.id", []byte(msg))
+	msg1 := restaurantName
+	err = nc.Conn.Publish("get.restaurant.id", []byte(msg1))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, "failed to get id")
 		return
@@ -55,8 +55,9 @@ func CreateOrder(c *gin.Context) {
 
 	idChannel := make(chan string)
 	_, err = nc.Conn.Subscribe("send.restaurant.id", func(m *nats.Msg) {
-		database.Log.Info("Received id")
-		idChannel <- string(m.Data)
+		message := string(m.Data)
+		database.Log.Info("Received id: %s", string(message))
+		idChannel <- message
 	})
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "subscription error"})
@@ -65,12 +66,12 @@ func CreateOrder(c *gin.Context) {
 
 	select {
 	case restaurantID := <-idChannel:
-		database.Log.Info("Restaurant ID received: ", restaurantID)
-		msg := models.Message{
+		database.Log.Info("Restaurant ID received: %s", restaurantID)
+		msg2 := models.Message{
 			UserId:       userID,
 			RestaurantId: restaurantID,
 		}
-		jsonMsg, err := json.Marshal(msg)
+		jsonMsg, err := json.Marshal(msg2)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "json marshaling failed"})
 			return

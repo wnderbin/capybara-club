@@ -16,7 +16,7 @@ func CreateOrder() {
 		return
 	}
 	defer nc.Close()
-	_, err = nc.Conn.Subscribe("send.restaurant.id", func(m *nats.Msg) {
+	_, err = nc.Conn.Subscribe("create.order", func(m *nats.Msg) {
 		var receivedMessage models.Message
 		err = json.Unmarshal(m.Data, &receivedMessage)
 		if err != nil {
