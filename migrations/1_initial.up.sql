@@ -24,3 +24,11 @@ CREATE TABLE admins (
     email TEXT NOT NULL,
     password TEXT NOT NULL
 );
+
+CREATE TABLE orders (
+    id TEXT PRIMARY KEY NOT NULL,
+    user_id TEXT NOT NULL,
+    restaurant_id TEXT NOT NULL,
+    price INT NOT NULL,
+    delivery_status TEXT NOT NULL
+);

@@ -26,6 +26,7 @@ func main() {
 		go nats_client.UpdateRestaurants()
 		go nats_client.DeleteRestaurant()
 		go nats_client.UpdateRestaurant()
+		go nats_client.SendId()
 		router := gin.Default()
 		routes.Router(router)
 		router.Run(fmt.Sprintf("%s:%d", conf.Address, conf.Port))

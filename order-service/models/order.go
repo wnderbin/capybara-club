@@ -1,9 +1,9 @@
 package models
 
 type Order struct {
-	Id              string `json:"id"`
-	User_id         string `json:"user_id"`
-	Restaurant_id   string `json:"restaurant_id"`
-	Price           int    `json:"price"`
-	Delivery_status string `json:"status"`
+	Id              string `gorm:"primary_key" json:"id"`
+	User_id         string `gorm:"not null" json:"user_id"`
+	Restaurant_id   string `gorm:"not null" json:"restaurant_id"`
+	Price           int    `gorm:"not null" json:"price"`
+	Delivery_status string `gorm:"not null" json:"status"`
 }
