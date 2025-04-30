@@ -3,7 +3,7 @@ package handlers
 import (
 	"cap-club/admin-service/config"
 	"cap-club/admin-service/nats_client"
-	"cap-club/restaurant-service/models"
+	"cap-club/models"
 	"encoding/json"
 	"net/http"
 	"time"

@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"cap-club/database"
-	"cap-club/restaurant-service/models"
+	"cap-club/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

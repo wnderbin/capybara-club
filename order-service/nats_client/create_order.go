@@ -2,7 +2,7 @@ package nats_client
 
 import (
 	"cap-club/database"
-	"cap-club/order-service/models"
+	"cap-club/models"
 	"encoding/json"
 
 	"github.com/google/uuid"

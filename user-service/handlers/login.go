@@ -2,9 +2,9 @@ package handlers
 
 import (
 	"cap-club/database"
+	"cap-club/models"
 	"cap-club/user-service/config"
-	"cap-club/user-service/models"
-	"cap-club/user-service/utils"
+	"cap-club/utils"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -29,7 +29,7 @@ func Login(c *gin.Context) {
 
 	conf := config.MustLoad()
 
-	token, err := utils.GenerateJWT(user.Username, conf)
+	token, err := utils.GenerateJWTUser(user.Username, conf)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "could not generate token"})
 		return

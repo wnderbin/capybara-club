@@ -2,11 +2,11 @@ package main
 
 import (
 	"cap-club/admin-service/config"
-	"cap-club/admin-service/models"
 	"cap-club/admin-service/routes"
-	"cap-club/admin-service/utils"
 	"cap-club/database"
 	"cap-club/migrator"
+	"cap-club/models"
+	"cap-club/utils"
 	"fmt"
 	"log/slog"
 

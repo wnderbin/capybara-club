@@ -2,7 +2,7 @@ package nats_client
 
 import (
 	"cap-club/database"
-	"cap-club/restaurant-service/models"
+	"cap-club/models"
 	"encoding/json"
 
 	"github.com/nats-io/nats.go"

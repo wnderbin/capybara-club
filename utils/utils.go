@@ -1,7 +1,8 @@
 package utils
 
 import (
-	"cap-club/user-service/config"
+	adminConf "cap-club/admin-service/config"
+	userConf "cap-club/user-service/config"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -21,18 +22,18 @@ func CheckHashedPassword(password, hash string) bool {
 	return err == nil
 }
 
-type Claims struct {
+type UserClaims struct {
 	Username       string `json:"username"`
 	StandardClaims jwt.StandardClaims
 }
 
-func (c *Claims) Valid() error {
+func (c *UserClaims) Valid() error {
 	return c.StandardClaims.Valid()
 }
 
-func GenerateJWT(username string, conf *config.ServiceConfig) (string, error) {
+func GenerateJWTUser(username string, conf *userConf.ServiceConfig) (string, error) {
 	expirationTime := time.Now().Add(5 * time.Minute)
-	claims := &Claims{
+	claims := &UserClaims{
 		Username: username,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
@@ -40,4 +41,27 @@ func GenerateJWT(username string, conf *config.ServiceConfig) (string, error) {
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString([]byte(conf.JWTKey)) //
+}
+
+// --------
+
+type AdminClaims struct {
+	AdminName      string `json:"admin"`
+	StandardClaims jwt.StandardClaims
+}
+
+func (c *AdminClaims) Valid() error {
+	return c.StandardClaims.Valid()
+}
+
+func GenerateJWTAdmin(adminName string, conf *adminConf.ServiceConfig) (string, error) {
+	expirationTime := time.Now().Add(5 * time.Minute)
+	claims := &AdminClaims{
+		AdminName: adminName,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: expirationTime.Unix(),
+		},
+	}
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	return token.SignedString([]byte(conf.JWTKey))
 }

@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"cap-club/database"
-	"cap-club/user-service/models"
-	"cap-club/user-service/utils"
+	"cap-club/models"
+	"cap-club/utils"
 	"net/http"
 	"time"
 

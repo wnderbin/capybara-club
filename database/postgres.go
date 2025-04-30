@@ -53,7 +53,7 @@ func initPostgres() (*gorm.DB, error) {
 	}
 
 	sqldb.SetMaxOpenConns(25)
-	sqldb.SetMaxIdleConns(5)
+	sqldb.SetMaxIdleConns(7)
 	sqldb.SetConnMaxLifetime(5 * time.Minute)
 
 	return db, nil

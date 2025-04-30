@@ -5,4 +5,4 @@ go-run-service-restaurant:
 go-run-service-admin:
 	CONFIG_PATH=./admin-service/config/config.yaml go run ./admin-service/main.go
 go-run-service-order:
-	CONFIG_PATH=./order-service/config/config.yaml go run ./admin-service/main.go
+	CONFIG_PATH=./order-service/config/config.yaml go run ./order-service/main.go

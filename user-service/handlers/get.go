@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"cap-club/database"
+	"cap-club/models"
 	"cap-club/user-service/config"
-	"cap-club/user-service/models"
 	"net/http"
 
 	"github.com/dgrijalva/jwt-go"
