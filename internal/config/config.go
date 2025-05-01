@@ -49,7 +49,7 @@ func MustLoad() *DBConfig {
 }
 
 func DatabaseLoad() *DBConfig {
-	config_path := "./config/config.yaml"
+	config_path := "./internal/config/config.yaml"
 
 	if config_path == "" {
 		log.Fatal("[ config.go ] Config_path is not set")
