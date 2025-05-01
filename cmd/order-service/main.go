@@ -3,6 +3,7 @@ package main
 import (
 	"cap-club/cmd/order-service/config"
 	"cap-club/cmd/order-service/nats_client"
+	"cap-club/cmd/order-service/routes"
 	"cap-club/internal/database"
 	"cap-club/internal/migrator"
 	"fmt"
@@ -26,6 +27,7 @@ func main() {
 		go nats_client.CreateOrder()
 
 		router := gin.Default()
+		routes.Router(router)
 		router.Run(fmt.Sprintf("%s:%d", conf.Address, conf.Port))
 	}
 }

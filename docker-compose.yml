@@ -1,4 +1,67 @@
 services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - admin-service
+      - order-service
+      - user-service
+      - restaurant-service
+  admin-service:
+    build:
+      context: .
+      dockerfile: dockerfiles/admin.Dockerfile
+    expose:
+      - "8083"
+    ports:
+      - "8083:8083"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 256M
+  order-service:
+    build:
+      context: .
+      dockerfile: dockerfiles/order.Dockerfile
+    expose:
+      - "8084"
+    ports:
+      - "8084:8084"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 256M
+  restaurant-service:
+    build:
+      context: .
+      dockerfile: dockerfiles/restaurant.Dockerfile
+    expose:
+      - "8082"
+    ports:
+      - "8082:8082"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 256M
+  user-service:
+    build:
+      context: .
+      dockerfile: dockerfiles/user.Dockerfile
+    expose:
+      - "8081"
+    ports:
+      - "8081:8081"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 256M
   nats:
     image: nats:latest
     ports:
@@ -6,5 +69,22 @@ services:
       - "8222:8222"
     volumes:
       - nats_data:/data
+  postgres: 
+    image: postgres:15
+    restart: "no"
+    environment: 
+      POSTGRES_USER: wnd
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: wnd
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+    restart: "no"
+    ports:
+      - "6380:6379"
 volumes:
   nats_data:
+  pgdata:

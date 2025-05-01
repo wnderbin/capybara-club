@@ -1,7 +1,7 @@
 env: "local"
 
 postgres:
-  host: "localhost"
+  host: "postgres"
   port: 5432
   user: "wnd"
   password: "123"
@@ -9,8 +9,8 @@ postgres:
   sslmode: "disable"
 
 redis:
-  address: "localhost:6379"
+  address: "redis:6379"
   password: ""
   db: 0
 
-startup-status: 0 # 1/0. 1 - run. 0 - tests
+startup-status: 1 # 1/0. 1 - run. 0 - tests
