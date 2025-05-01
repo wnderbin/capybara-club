@@ -7,4 +7,6 @@ WORKDIR /app
 COPY . .
 RUN go mod download
 
+ENV CONFIG_PATH=./cmd/user-service/config/config.yaml
+
 CMD ["go", "run", "./cmd/user-service/main.go"]
